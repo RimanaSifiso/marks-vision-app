@@ -20,7 +20,7 @@ This app simulates an automatic marking system.
 # --- MODEL LOADING (Cached) ---
 @st.cache_resource
 def load_model():
-    model_name = "microsoft/trocr-small-handwritten" 
+    model_name = "microsoft/trocr-base-handwritten" 
     # ADD use_fast=False to avoid the tokenizer bug
     processor = TrOCRProcessor.from_pretrained(model_name, use_fast=False)
     model = VisionEncoderDecoderModel.from_pretrained(model_name)
