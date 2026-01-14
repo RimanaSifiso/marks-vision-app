@@ -8,7 +8,7 @@ from PIL import Image
 # --- PAGE CONFIG ---
 st.set_page_config(page_title="Auto-Marker Prototype", page_icon="📝")
 
-st.title("📝 South African Teacher's Assistant")
+st.title("Marks Vision")
 st.markdown("""
 This app simulates an automatic marking system. 
 1. Upload a photo of an assignment.
@@ -17,12 +17,12 @@ This app simulates an automatic marking system.
 """)
 
 # --- MODEL LOADING (Cached) ---
+# --- MODEL LOADING (Cached) ---
 @st.cache_resource
 def load_model():
-    # We use the 'small' model to ensure it runs fast and fits in memory on free cloud tiers
-    # Switch to 'microsoft/trocr-base-handwritten' for higher accuracy if you have GPU
     model_name = "microsoft/trocr-small-handwritten" 
-    processor = TrOCRProcessor.from_pretrained(model_name)
+    # ADD use_fast=False to avoid the tokenizer bug
+    processor = TrOCRProcessor.from_pretrained(model_name, use_fast=False)
     model = VisionEncoderDecoderModel.from_pretrained(model_name)
     return processor, model
 
